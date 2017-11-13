@@ -7,6 +7,7 @@ import guru.springframework.repositories.UnitOfMeasureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Optional;
 /**
  * created by Praful Jha on 12/11/2017
  */
+@Component
 public class RecipeBootstrap  implements ApplicationListener<ContextRefreshedEvent>{
 
     @Autowired
@@ -206,7 +208,6 @@ public class RecipeBootstrap  implements ApplicationListener<ContextRefreshedEve
         return recipes;
     }
 
-    }
 
 
 }

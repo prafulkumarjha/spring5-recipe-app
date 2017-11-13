@@ -1,14 +1,13 @@
 package guru.springframework.controller;
 
-import guru.springframework.domain.Category;
-import guru.springframework.domain.UnitOfMeasure;
-import guru.springframework.repositories.CategoryRepository;
-import guru.springframework.repositories.UnitOfMeasureRepository;
+import guru.springframework.domain.Recipe;
+import guru.springframework.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Optional;
+import java.util.Set;
 
 /**
  * created by Praful Jha on 12/11/2017
@@ -17,24 +16,18 @@ import java.util.Optional;
 public class IndexController {
 
     @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private UnitOfMeasureRepository unitOfMeasureRepository;
-
+    private  RecipeService recipeService;
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage() {
+    public String getIndexPage(Model model) {
 
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
 
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+      //  System.out.println("UOM id is : "+unitOfMeasureOptional.get().getId()+
+        //        " and description is : "+unitOfMeasureOptional.get().getDescription());
 
-        System.out.println("Category Id is : "+categoryOptional.get().getId()+" ::  Category description is : "+
-        categoryOptional.get().getDescription());
+        Set<Recipe> recipes = recipeService.getAllRecipe();
 
-        System.out.println("UOM id is : "+unitOfMeasureOptional.get().getId()+
-                " and description is : "+unitOfMeasureOptional.get().getDescription());
+        model.addAttribute("recipes",recipes);
 
 
 
